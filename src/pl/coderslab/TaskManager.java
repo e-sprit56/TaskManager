@@ -23,7 +23,7 @@ public class TaskManager {
 
     public static void menu() {
 
-        System.out.println("\n \n \n");
+        System.out.println("\n \n ");
         System.out.println("!!!!  Welcome in Task Manager 2020 XP PRO   !!!!");
         System.out.println("**************************************************");
         System.out.println(" ");
@@ -46,7 +46,10 @@ public class TaskManager {
                 case "list" -> read();
                 case "add" -> add();
                 case "remove" -> remove();
-                case "exit" -> running=false;
+                case "exit" -> {
+                    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Thank you for using Task Manager 2020 XP PRO. \nYour credit card has ben charged for 15k PLN");
+                    running = false;
+                }
                 default -> System.out.println("Invalid command");
             }
         }while (running);
@@ -59,7 +62,7 @@ public class TaskManager {
 
         String[] lines = dataImport();
 
-        System.out.println("Your current task list: \n");
+        System.out.println("Your current tasks list: \n");
 
         for (int i = 0; i < lines.length; i++) {
             System.out.println(i+1 + " || " + lines[i]);
@@ -77,7 +80,7 @@ public class TaskManager {
 
             String date;
             do{
-                System.out.println("Due Date in format: yyyy-mm-dd");
+                System.out.println(ConsoleColors.BLUE_BOLD + "Pleas enter a Due Date in format: yyyy-mm-dd" + ConsoleColors.RESET);
                 date = scanner.nextLine();
 
                 if(GenericValidator.isDate(date, "yyyy-mm-dd", true)){
@@ -88,7 +91,7 @@ public class TaskManager {
 
             String important;
             do {
-                System.out.println("Important: True or False");
+                System.out.println(ConsoleColors.BLUE_BOLD + "Important: True or False" + ConsoleColors.RESET);
                 important = scanner.nextLine().toLowerCase();
 
                 if(important.equals("true")||important.equals("false")){
@@ -105,7 +108,7 @@ public class TaskManager {
                 writer.append(newEntry); // usuniety powrót karetki
                 writer.close();
             }catch (IOException e){
-                System.out.println("File not found");
+                System.out.println(ConsoleColors.RED_BOLD + "File not found"  + ConsoleColors.RESET);
             }
         }
 
@@ -120,11 +123,17 @@ public class TaskManager {
 
             int taskNumber;
             while(true){
-                System.out.println("Which task number do you want to delete?");
+                System.out.println(ConsoleColors.BLUE_BOLD + "Which task number do you want to delete?" + ConsoleColors.RESET);
                 try {
                     taskNumber = scan.nextInt();
+
                 }catch (NumberFormatException e){
                     System.out.println("Invalid format");
+                    continue;
+                }
+
+                if(taskNumber> lines.length || taskNumber<=0){
+                    System.out.println(ConsoleColors.RED_BOLD + "Task not found" + ConsoleColors.RESET);
                     continue;
                 }
                 break;
