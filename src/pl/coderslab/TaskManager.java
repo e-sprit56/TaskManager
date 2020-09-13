@@ -61,7 +61,6 @@ public class TaskManager {
     public static void read() {
 
         String[] lines = dataImport();
-
         System.out.println("Your current tasks list: \n");
 
         for (int i = 0; i < lines.length; i++) {
@@ -105,7 +104,7 @@ public class TaskManager {
 
             try {
                 FileWriter writer = new FileWriter(FILE, true);
-                writer.append(newEntry); // usuniety powrót karetki
+                writer.append("\n" +newEntry);
                 writer.close();
             }catch (IOException e){
                 System.out.println(ConsoleColors.RED_BOLD + "File not found"  + ConsoleColors.RESET);
@@ -179,30 +178,6 @@ public class TaskManager {
     public static void main(String[] args) {
 
         menu();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
 
-
-//        Path path = Paths.get(FILE);
-
-//        try{
-//            if(!Files.exists(path)){
-//                Files.createFile(path);
-//            }
-//        }catch (IOException ignored){}
-
-//System.out.println((dataImport()));
